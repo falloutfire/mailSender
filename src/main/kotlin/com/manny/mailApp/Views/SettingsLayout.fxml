@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="450.0"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="com.manny.mailApp.Controllers.SettingsLayoutController">
+    <children>
+        <TextField fx:id="fromEmailField" layoutX="64.0" layoutY="112.0" prefHeight="25.0" prefWidth="322.0"
+                   promptText="Email:"/>
+        <PasswordField fx:id="passwordField" layoutX="64.0" layoutY="150.0" prefHeight="25.0" prefWidth="322.0"
+                       promptText="Пароль:"/>
+        <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="241.0" mnemonicParsing="false" onAction="#onClickClose"
+                   prefHeight="45.0" prefWidth="130.0" ripplerFill="WHITE" style="-fx-background-color: blue;"
+                   text="Отмена" textFill="WHITE"/>
+        <JFXButton buttonType="RAISED" layoutX="306.0" layoutY="241.0" mnemonicParsing="false"
+                   onAction="#onClickConnect" prefHeight="45.0" prefWidth="130.0" ripplerFill="WHITE"
+                   style="-fx-background-color: blue;" text="Соединение" textFill="WHITE"/>
+        <Label layoutX="174.0" layoutY="46.0" style="-fx-font-family: Roboto Medium; -fx-font-size: 20;"
+               text="Настройки"/>
+    </children>
+</AnchorPane>

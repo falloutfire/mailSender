@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXChipView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="800.0"
+            style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            fx:controller="com.manny.mailApp.Controllers.MainLayoutController">
+    <children>
+        <JFXChipView fx:id="toEmailView" layoutX="25.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0"
+                     style="-fx-pref-width: 750; -fx-pref-height: 50; -fx-border-style: solid; -fx-border-color: d8d8d8; -fx-background-color: white;"
+                     stylesheets="@style.css"/>
+        <TextField fx:id="themeField" layoutX="25.0" layoutY="96.0" prefHeight="25.0" prefWidth="750.0"
+                   promptText="Тема:"
+                   style="-fx-border-style: solid; -fx-border-color: d8d8d8; -fx-background-color: white;"/>
+        <TextArea fx:id="bodyMailArea" layoutX="25.0" layoutY="136.0" prefHeight="286.0" prefWidth="750.0"
+                  promptText="Текст сообщения..."
+                  style="-fx-border-style: solid; -fx-border-color: d8d8d8; -fx-background-color: white;"/>
+        <!--<Button layoutX="666.0" layoutY="455.0" mnemonicParsing="false" onAction="#onClickSend" text="Button" />-->
+        <JFXButton buttonType="RAISED" layoutX="648.0" layoutY="442.0" mnemonicParsing="false" onAction="#onClickSend"
+                   prefHeight="44.0" prefWidth="127.0" ripplerFill="WHITE" style="-fx-background-color: blue;"
+                   text="Отправить" textFill="WHITE">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </JFXButton>
+        <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="25.0" layoutY="448.0" onMouseClicked="#onClickAttachFile"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@baseline_attach_file_black_48dp.png"/>
+            </image>
+        </ImageView>
+        <Label layoutX="25.0" layoutY="14.0" text="Получатели:" textFill="#4a4a4a"/>
+        <Label fx:id="fileLabel" layoutX="58.0" layoutY="448.0"/>
+    </children>
+</AnchorPane>

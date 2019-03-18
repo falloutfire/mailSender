@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="540.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            fx:controller="com.manny.mailApp.Controllers.RootLayoutController">
+    <top>
+        <!--<MenuBar BorderPane.alignment="CENTER">
+          <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>-->
+    </top>
+    <top>
+        <Pane prefHeight="29.0" prefWidth="800.0" BorderPane.alignment="TOP_LEFT">
+            <children>
+                <JFXButton layoutY="2.0" layoutX="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
+                           text="Настройки" onMouseClicked="#onClickSettings"/>
+            </children>
+        </Pane>
+    </top>
+</BorderPane>

@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+}
+
+group 'com.manny'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.1.1'
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
+    compile 'com.jfoenix:jfoenix:8.0.8' // Java 8
+    compile "com.sun.mail:javax.mail:1.6.2"
+/*    compile 'io.datafx:datafx:8.0.1'*/
+    compile 'io.datafx:flow:8.0.1'
+    // https://mvnrepository.com/artifact/de.jensd/fontawesomefx
+    /*compile group: 'de.jensd', name: 'fontawesomefx', version: '8.9'
+    // https://mvnrepository.com/artifact/de.jensd/fontawesomefx-commons
+    runtime group: 'de.jensd', name: 'fontawesomefx-commons', version: '9.1.2'*/
+
+    //compile 'de.jensd:fontawesomefx-commons:8.15'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/kotlin/"]
+            includes = ["**/*.*"]
+        }
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.manny.mailApp.MainKt'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

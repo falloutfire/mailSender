@@ -1,0 +1,24 @@
+.jfx-chip-view .chips-pane > .text-area {
+    /*-fx-padding: 0.333333em 0 0.333333em 0;*/
+    -fx-padding: 0.333333em 1 0.333333em 1;
+    -fx-min-width: 200px;
+    -fx-pref-height: 42;
+}
+
+.jfx-chip-view .jfx-chip > HBox {
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 14.0;
+    -fx-background-color: #E0E0E0;
+    -fx-max-width: 180px;
+    -fx-background-radius: 40px;
+    -fx-padding: 5px 5px 5px 20px;
+    -fx-pref-height: 32px;
+    -fx-alignment: center-left;
+    -fx-spacing: 8;
+}
+
+.jfx-chip-view .chips-pane > .text-area .content,
+.jfx-chip-view .chips-pane > .text-area:focused .content {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+    -fx-padding: 1 0 0 0;
+}
