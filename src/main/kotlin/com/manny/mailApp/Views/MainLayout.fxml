@@ -22,7 +22,6 @@
         <TextArea fx:id="bodyMailArea" layoutX="25.0" layoutY="136.0" prefHeight="286.0" prefWidth="750.0"
                   promptText="Текст сообщения..."
                   style="-fx-border-style: solid; -fx-border-color: d8d8d8; -fx-background-color: white;"/>
-        <!--<Button layoutX="666.0" layoutY="455.0" mnemonicParsing="false" onAction="#onClickSend" text="Button" />-->
         <JFXButton buttonType="RAISED" layoutX="648.0" layoutY="442.0" mnemonicParsing="false" onAction="#onClickSend"
                    prefHeight="44.0" prefWidth="127.0" ripplerFill="WHITE" style="-fx-background-color: blue;"
                    text="Отправить" textFill="WHITE">
