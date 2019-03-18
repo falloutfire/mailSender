@@ -52,10 +52,9 @@ class SettingsLayoutController {
         }
         GlobalScope.launch(Dispatchers.Main) {
             if (isCorrect) {
-                delay(500L)
+                delay(1000L)
                 println("success")
                 loader.close()
-                delay(500L)
                 loader = loadingShow(dialogStage!!, false)
                 loader.show()
                 delay(1500L)

@@ -106,7 +106,7 @@ fun alertShowJfxTest(dialogStage: Stage, header: String, content: String): JFXAl
 
     val btn = JFXButton("OK")
     btn.setMinSize(100.0, 35.0)
-    btn.style = "-fx-background-color: blue;"
+    btn.style = "-fx-background-color: #4876ff;"
     btn.textFill = Paint.valueOf("#FFFFFF")
 
     val alert = JFXAlert<Void>(dialogStage)
@@ -130,7 +130,7 @@ fun alertShowJfx(dialogStage: Stage, header: String, content: String) {
 
     val btn = JFXButton("OK")
     btn.setMinSize(100.0, 35.0)
-    btn.style = "-fx-background-color: blue;"
+    btn.style = "-fx-background-color: #4876ff;"
     btn.textFill = Paint.valueOf("#FFFFFF")
 
     val alert = JFXAlert<Void>(dialogStage)

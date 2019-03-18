@@ -23,7 +23,7 @@
                   promptText="Текст сообщения..."
                   style="-fx-border-style: solid; -fx-border-color: d8d8d8; -fx-background-color: white;"/>
         <JFXButton buttonType="RAISED" layoutX="648.0" layoutY="442.0" mnemonicParsing="false" onAction="#onClickSend"
-                   prefHeight="44.0" prefWidth="127.0" ripplerFill="WHITE" style="-fx-background-color: blue;"
+                   prefHeight="44.0" prefWidth="127.0" ripplerFill="WHITE" style="-fx-background-color: #4876ff;"
                    text="Отправить" textFill="WHITE">
             <font>
                 <Font size="14.0"/>
