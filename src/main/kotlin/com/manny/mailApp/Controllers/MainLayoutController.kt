@@ -1,16 +1,16 @@
 package com.manny.mailApp.Controllers
 
 import com.jfoenix.controls.JFXChipView
-import javafx.scene.control.Label
-import javafx.scene.control.TextArea
-import javafx.scene.control.TextField
-import javafx.stage.FileChooser
-import kotlinx.coroutines.*
 import com.manny.mailApp.Main
 import com.manny.mailApp.Utils.EmailUtil
 import com.manny.mailApp.Utils.User
 import com.manny.mailApp.alertShowJfx
 import com.manny.mailApp.loadingShow
+import javafx.scene.control.Label
+import javafx.scene.control.TextArea
+import javafx.scene.control.TextField
+import javafx.stage.FileChooser
+import kotlinx.coroutines.*
 import java.io.File
 import java.util.*
 import javax.mail.Authenticator
@@ -39,7 +39,7 @@ class MainLayoutController {
             themeMail = themeField.text.toString()
             bodyMail = bodyMailArea.text.toString()
 
-            if (EmailUtil().checkEmails(listEmails).isEmpty()) {
+            if (EmailUtil().checkEmails(listEmails).isEmpty() && !listEmails.isEmpty()) {
                 var alert = loadingShow(main?.primaryStage!!, true)
                 alert.show()
                 GlobalScope.launch(Dispatchers.Main) {
@@ -60,7 +60,7 @@ class MainLayoutController {
 
                         val session = Session.getInstance(props, auth)
                         EmailUtil()
-                            .sendEmail(session, user?.email!!, themeMail, listEmails, themeMail, bodyMail, file)
+                            .sendEmail(session, user?.email!!, user?.name!!, listEmails, themeMail, bodyMail, file)
                     }
                     delay(1000L)
                     alert.close()
@@ -90,7 +90,7 @@ class MainLayoutController {
         val fileChooser = FileChooser()
         file = fileChooser.showOpenDialog(main?.primaryStage)
         file?.let {
-            fileLabel.text = "Файл прикреплен\n${file!!.path}"
+            fileLabel.text = "Файл прикреплен\n${file!!.name}"
         }
     }
 

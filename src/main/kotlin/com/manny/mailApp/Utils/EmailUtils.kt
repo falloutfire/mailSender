@@ -11,6 +11,12 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
+import java.io.IOException
+import java.net.MalformedURLException
+import com.sun.xml.internal.ws.streaming.XMLStreamReaderUtil.close
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.net.URL
+
 
 class EmailUtil {
 
@@ -28,7 +34,7 @@ class EmailUtil {
     fun sendEmail(
         session: Session,
         fromEmail: String,
-        themeMail: String,
+        name: String,
         toEmail: List<String>,
         subject: String,
         body: String,
@@ -42,7 +48,7 @@ class EmailUtil {
                 msg.addHeader("format", "flowed")
                 msg.addHeader("Content-Transfer-Encoding", "8bit")
 
-                msg.setFrom(InternetAddress(fromEmail, themeMail))
+                msg.setFrom(InternetAddress(fromEmail, name))
                 msg.replyTo = InternetAddress.parse(it, false)
 
                 msg.setSubject(subject, "UTF-8")
@@ -89,25 +95,43 @@ class EmailUtil {
 
     }
 
+    @UseExperimental(ExperimentalCoroutinesApi::class)
     suspend fun checkConnection(user: User): Boolean = withContext(Dispatchers.Default) {
+        val port = 587
+        val host = "smtp.gmail.com"
+        val props = Properties()
+        props["mail.smtp.host"] = "smtp.gmail.com" //SMTP Host
+        props["mail.smtp.port"] = "587" //TLS Port
+        props["mail.smtp.auth"] = "true" //enable authentication
+        props["mail.smtp.starttls.enable"] = "true" //enable STARTTLS
         try {
+            //create Authenticator object to pass in Session.getInstance argument
 
-            val port = 587
-            val host = "smtp.gmail.com"
-            val props = Properties()
-            // required for gmail
-            props["mail.smtp.starttls.enable"] = "true"
-            props["mail.smtp.auth"] = "true"
-            // or use getDefaultInstance instance if desired...
-            val session = Session.getInstance(props, null)
-            val transport = session.getTransport("smtp")
-            transport.connect(host, port, user.email, user.password)
-            transport.close()
+            withContext(Dispatchers.Unconfined){
+                val session = Session.getInstance(props, null)
+                val transport = session.getTransport("smtp")
+                transport.connect(host, port, user.email, user.password)
+                transport.close()
+            }
             return@withContext true
         } catch (e: AuthenticationFailedException) {
             println("AuthenticationFailedException - for authentication failures")
-            e.printStackTrace()
             return@withContext false
         }
+    }
+
+    suspend fun netIsAvailable(): Boolean = withContext(Dispatchers.IO) {
+        return@withContext try {
+            val url = URL("http://www.google.com")
+            val conn = url.openConnection()
+            conn.connect()
+            conn.getInputStream().close()
+            true
+        } catch (e: MalformedURLException) {
+            throw RuntimeException(e)
+        } catch (e: IOException) {
+            false
+        }
+
     }
 }
