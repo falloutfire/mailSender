@@ -109,7 +109,7 @@ class EmailUtil {
         subject: String,
         body: String,
         file: File?
-    ): Boolean = withContext(Dispatchers.Default) {
+    ): Boolean {
         val httpclient = DefaultHttpClient()
         //val httppost = HttpPost("https://mail-server-spring.herokuapp.com/mail/sendEmailWithAttach")
         val httppost = HttpPost("http://localhost:8080/")
@@ -148,6 +148,7 @@ class EmailUtil {
                 return@withContext false
             }
         }
+        return false
     }
 
     suspend fun checkConnection(user: User): Boolean = withContext(Dispatchers.Default) {
