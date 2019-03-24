@@ -15,13 +15,8 @@ import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.*
-import javax.activation.DataHandler
-import javax.activation.FileDataSource
-import javax.mail.*
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeBodyPart
-import javax.mail.internet.MimeMessage
-import javax.mail.internet.MimeMultipart
+import javax.mail.AuthenticationFailedException
+import javax.mail.Session
 
 
 class EmailUtil {
@@ -35,70 +30,6 @@ class EmailUtil {
 
         }
         return checkEmails
-    }
-
-    fun sendEmail(
-        session: Session,
-        fromEmail: String,
-        name: String,
-        toEmail: List<String>,
-        subject: String,
-        body: String,
-        file: File?
-    ) {
-        try {
-            toEmail.forEach {
-                val msg = MimeMessage(session)
-                //set message headers
-                msg.addHeader("Content-type", "text/HTML; charset=UTF-8")
-                msg.addHeader("format", "flowed")
-                msg.addHeader("Content-Transfer-Encoding", "8bit")
-
-                msg.setFrom(InternetAddress(fromEmail, name))
-                msg.replyTo = InternetAddress.parse(it, false)
-
-                msg.setSubject(subject, "UTF-8")
-
-                msg.sentDate = Date()
-
-                if (file != null) {
-                    // Create a multipart message for attachment
-                    val multipart = MimeMultipart()
-
-                    // Create the message body part
-                    var messageBodyPart: BodyPart = MimeBodyPart()
-
-                    // Fill the message
-                    messageBodyPart.setText(body)
-
-                    // Set text message part
-                    multipart.addBodyPart(messageBodyPart)
-
-                    // Second part is attachment
-                    messageBodyPart = MimeBodyPart()
-                    val source = FileDataSource(file)
-                    messageBodyPart.dataHandler = DataHandler(source)
-                    messageBodyPart.fileName = file.name
-                    multipart.addBodyPart(messageBodyPart)
-
-                    // Send the complete message parts
-                    msg.setContent(multipart)
-                } else {
-                    msg.setText(body, "UTF-8")
-                }
-
-                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(it, false))
-                println("Message is ready")
-                Transport.send(msg)
-
-                println("EMail Sent Successfully!!")
-            }
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
     }
 
     suspend fun sendEmailToServer(
