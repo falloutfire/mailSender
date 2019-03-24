@@ -20,6 +20,23 @@ dependencies {
     compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
     compile 'com.jfoenix:jfoenix:8.0.8' // Java 8
     compile "com.sun.mail:javax.mail:1.6.2"
+    compile group: 'org.json', name: 'json', version: '20180813'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.8'
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    //compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.6'
+
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.0'
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore
+    compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.0'
+// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime
+    compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.0'
+
+
+
+
 /*    compile 'io.datafx:datafx:8.0.1'*/
     compile 'io.datafx:flow:8.0.1'
     // https://mvnrepository.com/artifact/de.jensd/fontawesomefx

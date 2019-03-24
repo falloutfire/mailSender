@@ -3,14 +3,14 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="540.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="540.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
             fx:controller="com.manny.mailApp.Controllers.RootLayoutController">
     <top>
         <Pane prefHeight="29.0" prefWidth="800.0" BorderPane.alignment="TOP_LEFT">
             <children>
-                <JFXButton layoutY="2.0" layoutX="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0"
-                           text="Настройки" onMouseClicked="#onClickSettings"/>
+                <JFXButton layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#onClickSettings"
+                           prefHeight="25.0" prefWidth="100.0" text="Настройки"/>
             </children>
         </Pane>
     </top>

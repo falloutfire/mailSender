@@ -1,6 +1,8 @@
 package com.manny.mailApp.Controllers
 
 import com.manny.mailApp.Main
+import javafx.stage.FileChooser
+
 
 class RootLayoutController {
 
@@ -8,6 +10,13 @@ class RootLayoutController {
 
     fun setMainApp(main: Main) {
         this.main = main
+    }
+
+    fun onClickTest() {
+
+        val fileChooser = FileChooser()
+        val file = fileChooser.showOpenDialog(main?.primaryStage)
+
     }
 
     fun onClickSettings() {

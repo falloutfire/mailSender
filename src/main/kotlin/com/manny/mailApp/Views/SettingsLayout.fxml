@@ -5,8 +5,9 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manny.mailApp.Controllers.SettingsLayoutController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: white;" prefHeight="300.0"
+            prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            fx:controller="com.manny.mailApp.Controllers.SettingsLayoutController">
     <children>
         <Label layoutX="174.0" layoutY="46.0" style="-fx-font-family: Roboto Medium; -fx-font-size: 20;" text="Настройки" />
         <TextField fx:id="nameField" layoutX="64.0" layoutY="100.0" prefHeight="25.0" prefWidth="322.0" promptText="Имя:" />

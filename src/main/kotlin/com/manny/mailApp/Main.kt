@@ -5,6 +5,10 @@ import com.jfoenix.controls.JFXAlert
 import com.jfoenix.controls.JFXButton
 import com.jfoenix.controls.JFXDialogLayout
 import com.jfoenix.controls.JFXSpinner
+import com.manny.mailApp.Controllers.MainLayoutController
+import com.manny.mailApp.Controllers.RootLayoutController
+import com.manny.mailApp.Controllers.SettingsLayoutController
+import com.manny.mailApp.Utils.User
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
@@ -15,10 +19,6 @@ import javafx.scene.paint.Paint
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.StageStyle
-import com.manny.mailApp.Controllers.MainLayoutController
-import com.manny.mailApp.Controllers.RootLayoutController
-import com.manny.mailApp.Controllers.SettingsLayoutController
-import com.manny.mailApp.Utils.User
 import java.io.IOException
 
 
@@ -44,7 +44,7 @@ class Main : Application() {
         val loader = FXMLLoader()
         loader.location = Main::class.java.getResource("Views/MainLayout.fxml")
 
-        val mainPane = loader.load<AnchorPane>() as AnchorPane
+        val mainPane = loader.load<AnchorPane>()
         rootPane?.center = mainPane
 
         mainLoader = loader.getController<MainLayoutController>()
@@ -55,7 +55,7 @@ class Main : Application() {
     private fun initRootLayout() {
         val loader = FXMLLoader()
         loader.location = Main::class.java.getResource("Views/RootLayout.fxml")
-        rootPane = loader.load<BorderPane>() as BorderPane
+        rootPane = loader.load<BorderPane>()
 
         val scene = Scene(rootPane)
         primaryStage?.scene = scene
@@ -97,8 +97,9 @@ class Main : Application() {
 
 fun alertShowJfxTest(dialogStage: Stage, header: String, content: String): JFXAlert<Void> {
     val labelHeader = Label(header)
-
+    labelHeader.style = "-fx-font-family: Roboto Medium; -fx-font-size: 20;"
     val labelText = Label(content)
+    labelText.style = "-fx-font-family: Roboto Medium; -fx-font-size: 15;"
 
     val layout = JFXDialogLayout()
     layout.setHeading(labelHeader)
@@ -121,8 +122,9 @@ fun alertShowJfxTest(dialogStage: Stage, header: String, content: String): JFXAl
 
 fun alertShowJfx(dialogStage: Stage, header: String, content: String) {
     val labelHeader = Label(header)
-
+    labelHeader.style = "-fx-font-family: Roboto Medium; -fx-font-size: 20;"
     val labelText = Label(content)
+    labelText.style = "-fx-font-family: Roboto Medium; -fx-font-size: 15;"
 
     val layout = JFXDialogLayout()
     layout.setHeading(labelHeader)
@@ -149,7 +151,9 @@ fun loadingShow(dialogStage: Stage, spin: Boolean): JFXAlert<Void> {
         val spinner = JFXSpinner()
         layout.setBody(spinner)
     } else {
-        layout.setBody(Label("Операция выполнена"))
+        val label = Label("Операция выполнена")
+        label.style = "-fx-font-family: Roboto Medium; -fx-font-size: 20;"
+        layout.setBody(label)
     }
     val alert = JFXAlert<Void>(dialogStage)
     alert.isOverlayClose = true

@@ -5,17 +5,17 @@ import com.manny.mailApp.Main
 import com.manny.mailApp.Utils.EmailUtil
 import com.manny.mailApp.Utils.User
 import com.manny.mailApp.alertShowJfx
+import com.manny.mailApp.alertShowJfxTest
 import com.manny.mailApp.loadingShow
 import javafx.scene.control.Label
 import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
 import javafx.stage.FileChooser
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
-import java.util.*
-import javax.mail.Authenticator
-import javax.mail.PasswordAuthentication
-import javax.mail.Session
 
 class MainLayoutController {
 
@@ -43,31 +43,38 @@ class MainLayoutController {
                 var alert = loadingShow(main?.primaryStage!!, true)
                 alert.show()
                 GlobalScope.launch(Dispatchers.Main) {
-                    withContext(Dispatchers.Default) {
-                        val props = Properties()
-                        props["mail.smtp.host"] = "smtp.gmail.com" //SMTP Host
-                        props["mail.smtp.port"] = "587" //TLS Port
-                        props["mail.smtp.auth"] = "true" //enable authentication
-                        props["mail.smtp.starttls.enable"] = "true" //enable STARTTLS
-
-
-                        //create Authenticator object to pass in Session.getInstance argument
-                        val auth = object : Authenticator() {
-                            override fun getPasswordAuthentication(): PasswordAuthentication {
-                                return PasswordAuthentication(user?.email, user?.password)
-                            }
-                        }
-
-                        val session = Session.getInstance(props, auth)
-                        EmailUtil()
-                            .sendEmail(session, user?.email!!, user?.name!!, listEmails, themeMail, bodyMail, file)
+                    val isAvaliable = run {
+                        EmailUtil().netIsAvailable()
                     }
-                    delay(1000L)
-                    alert.close()
-                    alert = loadingShow(main?.primaryStage!!, false)
-                    alert.show()
-                    delay(1000L)
-                    alert.close()
+                    if (isAvaliable) {
+                        val isSend = run {
+                            EmailUtil().sendEmailToServer(
+                                user?.email!!,
+                                user?.password!!,
+                                user?.name!!,
+                                listEmails,
+                                themeMail,
+                                bodyMail,
+                                file
+                            )
+                        }
+                        if (isSend) {
+                            delay(1000L)
+                            alert.close()
+                            alert = loadingShow(main?.primaryStage!!, false)
+                            alert.show()
+                            delay(1000L)
+                            alert.close()
+                        } else {
+                            delay(1000L)
+                            alert.close()
+                            alertShowJfx(
+                                main?.primaryStage!!,
+                                "Сервер недоступен",
+                                "Пожалуйста, попробуйте повторить операцию через некоторое время."
+                            )
+                        }
+                    }
                 }
             } else {
                 alertShowJfx(
@@ -90,7 +97,12 @@ class MainLayoutController {
         val fileChooser = FileChooser()
         file = fileChooser.showOpenDialog(main?.primaryStage)
         file?.let {
-            fileLabel.text = "Файл прикреплен\n${file!!.name}"
+            if (it.length() <= 1024 * 1024 * 10) {
+                fileLabel.text = "Файл прикреплен\n${file!!.name}"
+            } else {
+                alertShowJfxTest(main?.primaryStage!!, "Ошибка", "Файл не может быть больше 10 Мб").showAndWait()
+                file = null
+            }
         }
     }
 
